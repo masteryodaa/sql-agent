@@ -16,7 +16,7 @@ db = SQLDatabase.from_uri("sqlite:///Chinook.db")
 
 # Initialize Groq Model
 model_name = "llama-3.2-90b-vision-preview"
-llm = ChatGroq(model=model_name)
+llm = ChatGroq(model=model_name, api_key=st.secrets["GROQ_API_KEY"])
 
 # Convert Question to SQL Query
 query_prompt_template = hub.pull("langchain-ai/sql-query-system-prompt")
@@ -136,8 +136,9 @@ with st.sidebar:
             </div>
             <div>
                 <span style="color: #666;">Status:</span> 
-                <span style="color: {'#28a745' if os.environ.get("GROQ_API_KEY") else '#dc3545'}">
-                    {'Connected' if os.environ.get("GROQ_API_KEY") else 'Disconnected'}
+                # Change the status check in the sidebar section to:
+                <span style="color: {'#28a745' if st.secrets.get("GROQ_API_KEY") else '#dc3545'}">
+                    {'Connected' if st.secrets.get("GROQ_API_KEY") else 'Disconnected'}
                 </span>
             </div>
         </div>
