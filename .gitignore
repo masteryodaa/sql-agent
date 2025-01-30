@@ -1,0 +1,4 @@
+# add the required files to the .gitignore file
+
+__pycache__/
+.env
